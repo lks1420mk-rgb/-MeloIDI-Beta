@@ -5,536 +5,703 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#000000">
 <title>MeloIDI</title>
+
 <style>
-:root{
- --accent:#777777;
- --tint:#333333;
- --ink:#ffffff;
- --panel:#151515;
- --bg:#000000;
+:root {
+  --accent:#777777;
+  --tint:#292929;
+  --ink:#f5f5f5;
+  --panel:#171717;
+  --bg:#000000;
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{
- margin:0;
- min-height:100%;
- width:100%;
- background:#000;
- overflow-x:hidden;
+
+* {
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
-body{
- position:relative;
- min-height:100svh;
- color:var(--ink);
- font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
- touch-action:pan-y;
+
+html {
+  background:#000;
+  overflow-x:hidden;
+  touch-action:pan-y;
 }
-header{
- padding:calc(env(safe-area-inset-top) + 15px) 18px 12px;
- display:flex;
- align-items:center;
- justify-content:space-between
+
+body {
+  margin:0;
+  position:relative;
+  min-height:100svh;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  touch-action:pan-y;
+  overflow-x:hidden;
 }
-.logo{font-size:27px;font-weight:800;letter-spacing:-1.2px}
-.sub{font-size:9px;letter-spacing:2px;color:#888;margin-top:1px}
-button,select{font:inherit}
-select{
- border:1px solid #444;
- border-radius:12px;
- padding:9px 28px 9px 10px;
- background:#222;
- color:#fff;
- max-width:190px
+
+button,select,input {
+  font:inherit;
 }
-main{padding:0 14px 24px;max-width:760px;margin:auto}
-.panel{
- background:var(--panel);
- border-radius:18px;
- padding:14px;
- margin:10px 0
+
+header {
+  padding:calc(env(safe-area-inset-top) + 10px) 14px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
-.row{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:10px
+
+.logo {
+  font-size:23px;
+  font-weight:800;
+  letter-spacing:-1.2px;
 }
-.label{
- font-size:11px;
- color:#aaa;
- letter-spacing:1px;
- font-weight:700
+
+.sub {
+  font-size:8px;
+  letter-spacing:2px;
+  color:#888;
+  margin-top:1px;
 }
-button{
- border:0;
- border-radius:12px;
- padding:10px 13px;
- background:#333;
- color:#fff;
- font-weight:650
+
+select {
+  border:1px solid #444;
+  border-radius:10px;
+  padding:7px 24px 7px 9px;
+  background:#222;
+  color:#fff;
+  max-width:170px;
+  font-size:12px;
 }
-button:active{transform:scale(.97)}
-button.primary,button.selected{
- background:var(--accent);
- color:white
+
+main {
+  padding:0 11px 18px;
+  max-width:760px;
+  margin:auto;
 }
-.controls{
- display:flex;
- align-items:center;
- gap:8px;
- flex-wrap:wrap
+
+.panel {
+  background:var(--panel);
+  border:1px solid #292929;
+  border-radius:15px;
+  padding:11px;
+  margin:8px 0;
 }
-.octave{display:flex;align-items:center;gap:9px}
-.octave button{font-size:20px;min-width:40px;padding:7px}
-#octaveLabel{
- font-size:14px;
- font-weight:750;
- min-width:38px;
- text-align:center
+
+.row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
 }
-.mode button{flex:1}
-.theme-grid{
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:8px;
- margin-top:10px
+
+.label {
+  font-size:10px;
+  color:#999;
+  letter-spacing:1px;
+  font-weight:700;
 }
-.theme{
- display:flex;
- align-items:center;
- gap:8px;
- padding:9px 7px;
- border:1px solid #444;
- text-align:left;
- font-size:12px;
- min-width:0
+
+.status {
+  font-size:11px;
+  color:#aaa;
+  min-height:16px;
 }
-.theme .swatch{
- width:17px;
- height:17px;
- border-radius:50%;
- flex:none;
- background:var(--c)
+
+button {
+  border:1px solid #383838;
+  border-radius:10px;
+  padding:8px 10px;
+  background:#292929;
+  color:#eee;
+  font-weight:650;
+  font-size:13px;
+  cursor:pointer;
 }
-.theme.active{
- outline:2px solid var(--accent);
- border-color:transparent;
- background:#333
+
+button:active {
+  transform:scale(.97);
 }
-.theme span:last-child{
- overflow:hidden;
- text-overflow:ellipsis;
- white-space:nowrap
+
+button.primary,
+button.selected {
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
 }
-.keyboard-wrap{
- margin:14px -4px 0;
- overflow-x:auto;
- overflow-y:hidden;
- overscroll-behavior-x:contain;
- padding:3px 4px 12px;
- touch-action:pan-x pan-y;
- -webkit-overflow-scrolling:touch
+
+.controls {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
 }
-.keyboard{
- position:relative;
- height:220px;
- display:flex;
- min-width:100%;
- width:max-content;
- user-select:none;
- -webkit-user-select:none
+
+.mode button {
+  flex:1;
 }
-.white{
- position:relative;
- width:clamp(42px,11.8vw,66px);
- height:220px;
- background:#fff;
- border:1px solid #999;
- border-radius:0 0 7px 7px;
- z-index:1;
- display:flex;
- align-items:flex-end;
- justify-content:center;
- padding-bottom:10px;
- color:#333;
- font-size:11px;
- touch-action:pan-x pan-y
+
+.octave {
+  display:flex;
+  align-items:center;
+  gap:7px;
 }
-.white.down{
- background:var(--tint);
- box-shadow:inset 0 -5px var(--accent)
+
+.octave button {
+  font-size:18px;
+  min-width:35px;
+  padding:5px;
 }
-.black{
- position:absolute;
- top:0;
- width:clamp(26px,7.2vw,39px);
- height:137px;
- background:linear-gradient(90deg,#161616,#444 55%,#171717);
- border-radius:0 0 5px 5px;
- z-index:3;
- transform:translateX(-50%);
- box-shadow:0 3px 4px #0004;
- color:#ddd;
- font-size:9px;
- display:flex;
- align-items:flex-end;
- justify-content:center;
- padding-bottom:8px;
- touch-action:pan-x pan-y
+
+#octaveLabel {
+  font-size:13px;
+  font-weight:750;
+  min-width:38px;
+  text-align:center;
 }
-.black.down{
- background:var(--accent);
- box-shadow:0 3px 4px #0003
+
+.theme-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:6px;
+  margin-top:8px;
 }
-.status{font-size:12px;color:#aaa;min-height:18px}
-.volume{
- width:100%;
- accent-color:var(--accent);
- touch-action:pan-x pan-y
+
+.theme {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:7px 6px;
+  border:1px solid #383838;
+  text-align:left;
+  font-size:11px;
+  min-width:0;
+  background:#222;
 }
-.note{font-variant-numeric:tabular-nums;font-size:19px;font-weight:750}
-footer{
- text-align:center;
- color:#777;
- font-size:10px;
- padding:10px 0 20px
+
+.theme .swatch {
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  flex:none;
+  background:var(--c);
 }
-@media(max-width:390px){
- .theme-grid{grid-template-columns:repeat(2,1fr)}
- .keyboard{height:200px}
- .white{height:200px}
- .black{height:125px}
+
+.theme.active {
+  outline:2px solid var(--accent);
+  border-color:transparent;
+  background:#303030;
+}
+
+.theme span:last-child {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.keyboard-wrap {
+  margin:10px -4px 0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  overscroll-behavior-x:contain;
+  padding:2px 4px 8px;
+  touch-action:pan-x pan-y;
+  -webkit-overflow-scrolling:touch;
+}
+
+.keyboard {
+  position:relative;
+  height:190px;
+  display:flex;
+  min-width:100%;
+  width:max-content;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.white {
+  position:relative;
+  width:clamp(38px,10.8vw,59px);
+  height:190px;
+  background:#f5f5f5;
+  border:1px solid #aaa;
+  border-radius:0 0 7px 7px;
+  z-index:1;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:8px;
+  color:#777;
+  font-size:10px;
+  flex:none;
+}
+
+.white.down {
+  background:var(--tint);
+  box-shadow:inset 0 -5px var(--accent);
+}
+
+.black {
+  position:absolute;
+  top:0;
+  width:clamp(24px,6.6vw,35px);
+  height:118px;
+  background:linear-gradient(90deg,#111,#444 55%,#111);
+  border-radius:0 0 5px 5px;
+  z-index:3;
+  transform:translateX(-50%);
+  box-shadow:0 3px 4px #0008;
+  color:#ddd;
+  font-size:9px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:8px;
+}
+
+.black.down {
+  background:var(--accent);
+  box-shadow:0 3px 4px #0005;
+}
+
+.volume {
+  width:100%;
+  accent-color:var(--accent);
+}
+
+.note {
+  font-variant-numeric:tabular-nums;
+  font-size:17px;
+  font-weight:750;
+}
+
+footer {
+  text-align:center;
+  color:#777;
+  font-size:9px;
+  padding:7px 0 14px;
+}
+
+@media(max-width:390px) {
+  .theme-grid {
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .keyboard {
+    height:175px;
+  }
+
+  .white {
+    height:175px;
+  }
+
+  .black {
+    height:108px;
+  }
 }
 </style>
 </head>
+
 <body>
+
 <header>
- <div>
-  <div class="logo">MeloIDI</div>
-  <div class="sub">MOBILE PIANO</div>
- </div>
- <select id="themeSelect" aria-label="テーマ"></select>
+  <div>
+    <div class="logo">MeloIDI</div>
+    <div class="sub">MOBILE PIANO</div>
+  </div>
+  <select id="themeSelect" aria-label="テーマ"></select>
 </header>
 
 <main>
- <section class="panel">
-  <div class="row">
-   <span class="label">PLAYING</span>
-   <span class="status" id="status">タップして演奏</span>
-  </div>
-  <div class="row" style="margin-top:9px">
-   <div>
-    <div class="label">OCTAVE</div>
-    <div class="note" id="octaveLabel">C4</div>
-   </div>
-   <div class="octave">
-    <button id="octDown" aria-label="オクターブを下げる">−</button>
-    <button id="octUp" aria-label="オクターブを上げる">＋</button>
-   </div>
-  </div>
- </section>
 
- <section class="panel">
-  <div class="row">
-   <span class="label">OUTPUT</span>
-   <span class="status" id="outputStatus">iPhone音源</span>
-  </div>
-  <div class="controls mode" style="margin-top:9px">
-   <button class="selected" id="localMode">iPhoneで鳴らす</button>
-   <button id="pcMode">PC MIDI（準備中）</button>
-  </div>
- </section>
+  <section class="panel">
+    <div class="row">
+      <span class="label">PLAYING</span>
+      <span class="status" id="status">タップして演奏</span>
+    </div>
 
- <section class="panel">
-  <div class="row">
-   <span class="label">THEME COLOR</span>
-   <span class="status">6 PRESETS</span>
-  </div>
-  <div class="theme-grid" id="themeGrid"></div>
- </section>
+    <div class="row" style="margin-top:9px">
+      <div>
+        <div class="label">OCTAVE</div>
+        <div class="note" id="octaveLabel">C4</div>
+      </div>
 
- <section class="panel" style="padding:12px 9px 10px">
-  <div class="row" style="padding:0 5px">
-   <span class="label">PIANO KEYBOARD</span>
-   <span class="status">横にスクロールできます</span>
-  </div>
-  <div class="keyboard-wrap">
-   <div class="keyboard" id="keyboard"></div>
-  </div>
-  <div class="row" style="padding:0 5px">
-   <span class="label">MASTER VOLUME</span>
-   <span class="status" id="volText">70%</span>
-  </div>
-  <input class="volume" id="volume" type="range" min="0" max="100" value="70">
- </section>
+      <div class="octave">
+        <button id="octDown" aria-label="オクターブを下げる">−</button>
+        <button id="octUp" aria-label="オクターブを上げる">＋</button>
+      </div>
+    </div>
+  </section>
 
- <footer>
-  MeloIDI · Prototype 0.1<br>
-  PCへのMIDI送信は次の開発段階で追加します。
- </footer>
+  <section class="panel">
+    <div class="row">
+      <span class="label">OUTPUT</span>
+      <span class="status" id="outputStatus">iPhone音源</span>
+    </div>
+
+    <div class="controls mode" style="margin-top:9px">
+      <button class="selected" id="localMode">iPhoneで鳴らす</button>
+      <button id="pcMode">PC MIDI（準備中）</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="row">
+      <span class="label">THEME COLOR</span>
+      <span class="status">6 PRESETS</span>
+    </div>
+    <div class="theme-grid" id="themeGrid"></div>
+  </section>
+
+  <section class="panel" style="padding:12px 9px 10px">
+    <div class="row" style="padding:0 5px">
+      <span class="label">PIANO KEYBOARD</span>
+      <span class="status">横にスクロールできます</span>
+    </div>
+
+    <div class="keyboard-wrap">
+      <div class="keyboard" id="keyboard"></div>
+    </div>
+
+    <div class="row" style="padding:0 5px">
+      <span class="label">MASTER VOLUME</span>
+      <span class="status" id="volText">70%</span>
+    </div>
+
+    <input class="volume" id="volume" type="range"
+      min="0" max="100" value="70">
+  </section>
+
+  <footer>
+    MeloIDI · Prototype 0.1<br>
+    PCへのMIDI送信は次の開発段階で追加します。
+  </footer>
+
 </main>
 
 <script>
-const themes=[
- {id:"DEFAULT",name:"DEFAULT",color:"#777777",tint:"#333333"},
- {id:"01",name:"初音ミク",color:"#39C5BB",tint:"#d9f4f0"},
- {id:"02",name:"鏡音リン・レン",color:"#e9bd38",tint:"#fff2c9"},
- {id:"03",name:"巡音ルカ",color:"#d995b0",tint:"#f7e2ea"},
- {id:"00M",name:"MEIKO",color:"#d94b45",tint:"#f6dddb"},
- {id:"00K",name:"KAITO",color:"#3978b9",tint:"#dce9f8"}
+const themes = [
+  {id:"DEFAULT",name:"DEFAULT",color:"#777777",tint:"#292929"},
+  {id:"01",name:"初音ミク",color:"#39C5BB",tint:"#17423f"},
+  {id:"02",name:"鏡音リン・レン",color:"#e9bd38",tint:"#493d18"},
+  {id:"03",name:"巡音ルカ",color:"#d995b0",tint:"#49313c"},
+  {id:"00M",name:"MEIKO",color:"#d94b45",tint:"#4a2422"},
+  {id:"00K",name:"KAITO",color:"#3978b9",tint:"#1e3048"}
 ];
 
-let octave=4;
-let audio=null;
-let master=null;
-let volume=.7;
-let active=new Map();
-let pending=new Set();
-let currentTheme="DEFAULT";
+let octave = 4;
+let audio = null;
+let master = null;
+let volume = 0.7;
+let active = new Map();
+let currentTheme = "DEFAULT";
 
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 
-function setTheme(id){
- const t=themes.find(x=>x.id===id)||themes[0];
- currentTheme=t.id;
+function setTheme(id) {
+  const t = themes.find(x => x.id === id) || themes[0];
+  currentTheme = t.id;
 
- document.documentElement.style.setProperty("--accent",t.color);
- document.documentElement.style.setProperty("--tint",t.tint);
+  document.documentElement.style.setProperty("--accent",t.color);
+  document.documentElement.style.setProperty("--tint",t.tint);
 
- $("themeSelect").value=t.id;
- document.querySelector('meta[name="theme-color"]').content="#000000";
+  $("themeSelect").value = t.id;
 
- document.querySelectorAll(".theme").forEach(b=>{
-  b.classList.toggle("active",b.dataset.id===t.id);
- });
+  document.querySelector('meta[name="theme-color"]').content = "#000000";
 
- try{localStorage.setItem("meloidi-theme",t.id)}catch(e){}
+  document.querySelectorAll(".theme").forEach(b => {
+    b.classList.toggle("active",b.dataset.id === t.id);
+  });
+
+  try {
+    localStorage.setItem("meloidi-theme",t.id);
+  } catch(e) {}
 }
 
-themes.forEach(t=>{
- let o=document.createElement("option");
- o.value=t.id;
- o.textContent=t.id==="DEFAULT"?"DEFAULT · Monotone":t.id+" · "+t.name;
- $("themeSelect").append(o);
+themes.forEach(t => {
+  const option = document.createElement("option");
+  option.value = t.id;
+  option.textContent = t.id === "DEFAULT"
+    ? "DEFAULT · Monotone"
+    : t.id + " · " + t.name;
 
- let b=document.createElement("button");
- b.className="theme";
- b.dataset.id=t.id;
- b.innerHTML='<span class="swatch" style="--c:'+t.color+'"></span><span>'+t.id+' '+t.name+'</span>';
- b.onclick=()=>setTheme(t.id);
- $("themeGrid").append(b);
+  $("themeSelect").append(option);
+
+  const button = document.createElement("button");
+  button.className = "theme";
+  button.dataset.id = t.id;
+
+  const swatch = document.createElement("span");
+  swatch.className = "swatch";
+  swatch.style.setProperty("--c",t.color);
+
+  const name = document.createElement("span");
+  name.textContent = t.id + " " + t.name;
+
+  button.append(swatch,name);
+  button.onclick = () => setTheme(t.id);
+
+  $("themeGrid").append(button);
 });
 
-$("themeSelect").onchange=e=>setTheme(e.target.value);
+$("themeSelect").onchange = e => setTheme(e.target.value);
 
-try{
- setTheme(localStorage.getItem("meloidi-theme")||"DEFAULT");
-}catch(e){
- setTheme("DEFAULT");
+try {
+  setTheme(localStorage.getItem("meloidi-theme") || "DEFAULT");
+} catch(e) {
+  setTheme("DEFAULT");
 }
 
-function ensureAudio(){
- if(!audio){
-  const AudioContextClass=window.AudioContext||window.webkitAudioContext;
+/* Audio */
 
-  if(!AudioContextClass){
-   throw new Error("AudioContext非対応");
+async function ensureAudio() {
+  if (!audio) {
+    const AudioContextClass =
+      window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioContextClass) {
+      throw new Error("このブラウザは音声再生に対応していません。");
+    }
+
+    audio = new AudioContextClass();
+    master = audio.createGain();
+    master.gain.value = volume;
+    master.connect(audio.destination);
   }
 
-  audio=new AudioContextClass();
-  master=audio.createGain();
-  master.gain.value=volume;
-  master.connect(audio.destination);
- }
-
- if(audio.state!=="running"){
-  return audio.resume();
- }
-
- return Promise.resolve();
+  if (audio.state === "suspended") {
+    await audio.resume();
+  }
 }
 
-function freq(midi){
- return 440*Math.pow(2,(midi-69)/12);
+function freq(midi) {
+  return 440 * Math.pow(2,(midi - 69) / 12);
 }
 
-function startNote(id,midi,el){
- if(active.has(id)||pending.has(id))return;
+function noteName(m) {
+  return ["C","C♯","D","D♯","E","F","F♯","G","G♯","A","A♯","B"]
+    [m % 12] + (Math.floor(m / 12) - 1);
+}
 
- pending.add(id);
+async function startNote(id,midi,el) {
+  if (active.has(id)) return;
 
- try{
-  ensureAudio().then(()=>{
-   if(!pending.has(id))return;
+  const record = {osc:null,gain:null,el,midi};
+  active.set(id,record);
+  el.classList.add("down");
 
-   pending.delete(id);
+  try {
+    await ensureAudio();
 
-   const osc=audio.createOscillator();
-   const gain=audio.createGain();
+    // 指を離した後なら音を開始しない
+    if (active.get(id) !== record) return;
 
-   osc.type="triangle";
-   osc.frequency.value=freq(midi);
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
 
-   gain.gain.setValueAtTime(.0001,audio.currentTime);
-   gain.gain.exponentialRampToValueAtTime(.23,audio.currentTime+.012);
+    osc.type = "triangle";
+    osc.frequency.value = freq(midi);
 
-   osc.connect(gain);
-   gain.connect(master);
-   osc.start();
+    gain.gain.setValueAtTime(.0001,audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.23,audio.currentTime + .012);
 
-   active.set(id,{osc,gain,el,midi});
-   el.classList.add("down");
+    osc.connect(gain);
+    gain.connect(master);
+    osc.start();
 
-   $("status").textContent="演奏中 · "+noteName(midi);
-  }).catch(()=>{
-   pending.delete(id);
-   $("status").textContent="音声を開始できません。もう一度タップしてください";
+    record.osc = osc;
+    record.gain = gain;
+
+    $("status").textContent = "演奏中 · " + noteName(midi);
+
+  } catch(error) {
+    active.delete(id);
+    el.classList.remove("down");
+    $("status").textContent = "音声を開始できませんでした";
+    console.error(error);
+  }
+}
+
+function stopNote(id) {
+  const n = active.get(id);
+  if (!n) return;
+
+  active.delete(id);
+  n.el.classList.remove("down");
+
+  if (n.osc && n.gain && audio) {
+    const now = audio.currentTime;
+
+    n.gain.gain.cancelScheduledValues(now);
+    n.gain.gain.setTargetAtTime(.0001,now,.035);
+
+    try {
+      n.osc.stop(now + .16);
+    } catch(e) {}
+  }
+
+  $("status").textContent =
+    active.size ? "演奏中" : "タップして演奏";
+}
+
+/* Keyboard */
+
+const whitePC = [0,2,4,5,7,9,11];
+const blackPC = [1,3,6,8,10];
+
+function buildKeyboard() {
+  const keyboard = $("keyboard");
+
+  [...active.keys()].forEach(stopNote);
+  keyboard.innerHTML = "";
+
+  const start = (octave + 1) * 12;
+
+  // CSSの白鍵幅と同じ計算にする
+  const whiteWidth = Math.min(59,Math.max(38,innerWidth * .108));
+
+  for (let o = 0; o < 2; o++) {
+    for (let i = 0; i < 7; i++) {
+      const midi = start + o * 12 + whitePC[i];
+      const el = document.createElement("div");
+
+      el.className = "white";
+      el.textContent = i === 0 ? "C" + (octave + o) : "";
+      el.dataset.midi = midi;
+
+      keyboard.append(el);
+      bindKey(el,midi);
+    }
+  }
+
+  const whitesBefore = {
+    1:1,
+    3:2,
+    6:4,
+    8:5,
+    10:6
+  };
+
+  for (let o = 0; o < 2; o++) {
+    for (const pc of blackPC) {
+      const midi = start + o * 12 + pc;
+      const index = o * 7 + whitesBefore[pc];
+
+      const el = document.createElement("div");
+      el.className = "black";
+      el.style.left = (index * whiteWidth) + "px";
+      el.dataset.midi = midi;
+
+      keyboard.append(el);
+      bindKey(el,midi);
+    }
+  }
+
+  keyboard.style.width = (14 * whiteWidth) + "px";
+}
+
+function bindKey(el,midi) {
+  el.addEventListener("pointerdown",e => {
+    e.preventDefault();
+
+    try {
+      el.setPointerCapture(e.pointerId);
+    } catch(error) {}
+
+    startNote(e.pointerId,midi,el);
   });
- }catch(e){
-  pending.delete(id);
-  $("status").textContent="音声を開始できません";
- }
+
+  const end = e => {
+    e.preventDefault();
+    stopNote(e.pointerId);
+  };
+
+  el.addEventListener("pointerup",end);
+  el.addEventListener("pointercancel",end);
+  el.addEventListener("lostpointercapture",end);
 }
 
-function stopNote(id){
- pending.delete(id);
+/* Octave */
 
- const n=active.get(id);
- if(!n)return;
-
- const now=audio.currentTime;
-
- n.gain.gain.cancelScheduledValues(now);
- n.gain.gain.setTargetAtTime(.0001,now,.035);
-
- n.osc.stop(now+.16);
- n.el.classList.remove("down");
- active.delete(id);
-
- $("status").textContent=active.size?"演奏中":"タップして演奏";
-}
-
-function noteName(m){
- return ["C","C♯","D","D♯","E","F","F♯","G","G♯","A","A♯","B"][m%12]+(Math.floor(m/12)-1);
-}
-
-const whitePC=[0,2,4,5,7,9,11];
-const blackPC=[1,3,6,8,10];
-
-function buildKeyboard(){
- const k=$("keyboard");
- k.innerHTML="";
-
- active.forEach((_,id)=>stopNote(id));
-
- const start=(octave+1)*12;
- const whiteWidth=Math.min(66,Math.max(42,innerWidth*.118));
-
- for(let o=0;o<2;o++){
-  for(let i=0;i<7;i++){
-   const m=start+o*12+whitePC[i];
-   const el=document.createElement("div");
-
-   el.className="white";
-   el.textContent=i===0?"C"+(octave+o):"";
-   el.dataset.midi=m;
-
-   k.append(el);
-   bindKey(el,m);
+$("octDown").onclick = () => {
+  if (octave > 1) {
+    octave--;
+    updateOctave();
   }
- }
+};
 
- const whitesBefore={1:1,3:2,6:4,8:5,10:6};
-
- for(let o=0;o<2;o++){
-  for(const pc of blackPC){
-   const m=start+o*12+pc;
-   const idx=o*7+whitesBefore[pc];
-   const el=document.createElement("div");
-
-   el.className="black";
-   el.style.left=(idx*whiteWidth)+"px";
-   el.textContent="";
-   el.dataset.midi=m;
-
-   k.append(el);
-   bindKey(el,m);
+$("octUp").onclick = () => {
+  if (octave < 7) {
+    octave++;
+    updateOctave();
   }
- }
+};
 
- k.style.width=(14*whiteWidth)+"px";
+function updateOctave() {
+  $("octaveLabel").textContent = "C" + octave;
+  buildKeyboard();
 }
 
-function bindKey(el,midi){
- el.addEventListener("pointerdown",e=>{
-  e.preventDefault();
-  el.setPointerCapture?.(e.pointerId);
-  startNote(e.pointerId,midi,el);
- });
+/* Volume */
 
- const end=e=>{
-  e.preventDefault();
-  stopNote(e.pointerId);
- };
+$("volume").oninput = e => {
+  volume = Number(e.target.value) / 100;
+  $("volText").textContent = e.target.value + "%";
 
- el.addEventListener("pointerup",end);
- el.addEventListener("pointercancel",end);
- el.addEventListener("lostpointercapture",end);
-}
-
-$("octDown").onclick=()=>{
- if(octave>1){
-  octave--;
-  updateOctave();
- }
+  if (master && audio) {
+    master.gain.setTargetAtTime(
+      volume,
+      audio.currentTime,
+      .02
+    );
+  }
 };
 
-$("octUp").onclick=()=>{
- if(octave<7){
-  octave++;
-  updateOctave();
- }
+/* Output mode */
+
+$("localMode").onclick = () => {
+  $("localMode").classList.add("selected");
+  $("pcMode").classList.remove("selected");
+  $("outputStatus").textContent = "iPhone音源";
 };
 
-function updateOctave(){
- $("octaveLabel").textContent="C"+octave;
- buildKeyboard();
-}
-
-$("volume").oninput=e=>{
- volume=Number(e.target.value)/100;
- $("volText").textContent=e.target.value+"%";
-
- if(master){
-  master.gain.setTargetAtTime(volume,audio.currentTime,.02);
- }
+$("pcMode").onclick = () => {
+  alert("PC MIDI送信は次の開発段階で追加します。現在はiPhone内蔵音源で演奏できます。");
 };
 
-$("localMode").onclick=()=>{
- $("localMode").classList.add("selected");
- $("pcMode").classList.remove("selected");
- $("outputStatus").textContent="iPhone音源";
-};
-
-$("pcMode").onclick=()=>{
- alert("PC MIDI送信は次の開発段階で追加します。現在はiPhone内蔵音源で演奏できます。");
-};
+/* Initialization */
 
 buildKeyboard();
 
 window.addEventListener("resize",buildKeyboard);
 
-document.addEventListener("visibilitychange",()=>{
- if(document.hidden){
-  [...active.keys()].forEach(stopNote);
- }
+document.addEventListener("visibilitychange",() => {
+  if (document.hidden) {
+    [...active.keys()].forEach(stopNote);
+  }
 });
 
-document.addEventListener("gesturestart",e=>e.preventDefault());
-document.addEventListener("gesturechange",e=>e.preventDefault());
-document.addEventListener("gestureend",e=>e.preventDefault());
+/* iPhone pinch zoom prevention */
+
+document.addEventListener("gesturestart",e => {
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener("gesturechange",e => {
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener("gestureend",e => {
+  e.preventDefault();
+},{passive:false});
+
+document.addEventListener("touchmove",e => {
+  if (e.touches.length > 1) {
+    e.preventDefault();
+  }
+},{passive:false});
+
 </script>
 </body>
 </html>
